@@ -1,0 +1,65 @@
+apply plugin: "idea"
+apply plugin: "jetty"
+apply plugin: "maven"
+
+defaultTasks "jettyRun"
+
+group = "com.neustar"
+version = "1.0-SNAPSHOT"
+description = "Neustar IP Intelligence GeoPoint On-Demand (GPP) Demo Application"
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "1.10"
+}
+
+ext {
+    springGroup = "org.springframework"
+    springVersion = "4.0.1.RELEASE"
+    easyMockGroup = "org.easymock"
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile group: springGroup, name: "spring-core", version: springVersion
+    compile group: springGroup, name: "spring-web", version: springVersion
+    compile group: "javax.servlet", name: "servlet-api", version: "2.5"
+    compile group: springGroup, name: "spring-webmvc", version: springVersion
+    runtime group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.3.1"
+    runtime group: "javax.servlet.jsp", name: "jsp-api", version: "2.1"
+    runtime group: "org.webjars", name: "bootstrap", version: "3.0.3"
+    runtime group: "ch.qos.logback", name: "logback-classic", version: "1.0.13"
+    runtime group: "org.slf4j", name: "jcl-over-slf4j", version: "1.7.5"
+    runtime group: "javax.servlet", name: "jstl", version: "1.2"
+    runtime group: "javax.el", name: "el-api", version: "1.0"
+
+    testCompile group: springGroup, name: "spring-test", version: springVersion
+    testCompile group: "junit", name: "junit", version: "4.8.2"
+    testCompile group: easyMockGroup, name: "easymock", version: "3.2"
+
+}
+
+jettyRun {
+    httpPort = 7000
+}
+
+jettyStop {
+    stopKey = "foo"
+    stopPort = 7000
+}
+
+task integrationTest(type: Test) {
+    include "**/*IT*"
+}
+
+test {
+    exclude "**/*IT*"
+}
+
+war {
+    archiveName = "neustar.war"
+}
