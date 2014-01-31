@@ -10,7 +10,7 @@ practices without submitting to impractical dogma.
 ##Technical Details
 
 The application is built with [Gradle](http://www.gradle.org/) but uses the [Wrapper](http://www.gradle.org/docs/current/userguide/userguide_single.html#gradle_wrapper),
-so you not have to install Gradle. Because of the
+so you do not have to install Gradle. Because of the
 Java requirement, this is a Spring MVC application with a JSP front end utilizing [Twitter Bootstrap](http://getbootstrap.com/)
 via [WebJars](http://www.webjars.org/).
 Other technologies include [Jackson](https://github.com/FasterXML/jackson-databind) for JSON serialization/deserialization,
